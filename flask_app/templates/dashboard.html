@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome TO Car Deals,  {{user.first_name}}</h2>
+    <a href="/logout">Sign out</a>
+    <a href="/cars/new">+ Create</a>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Seller</th>
+                <th>Actions</th>
+                
+            </tr>
+            {% for car in cars %}
+            <tr>
+                <td>{{car.model}}</td>
+                <td>{{car.year}}</td>
+                <td>{{car.seller.first_name}} {{car.seller.last_name}}</td>
+                <td><a href="/cars/{{car.id}}">Show</a>
+                {% if car.seller.id  == user.id %}
+                |
+                    <a href="/cars/edit/{{car.id}}">edit</a>|
+                    <a href="/delete/{{car.id}}">Delete</a>
+                    </td>
+                
+                
+                {% endif %}
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
